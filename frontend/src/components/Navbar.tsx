@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -16,6 +16,7 @@ const links = [
 
 export function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <motion.header
@@ -73,6 +74,7 @@ export function Navbar() {
 
       {/* 3. Right: Socials & CTA */}
       <div className="pointer-events-auto flex items-center gap-3">
+        {/* Socials & Desktop CTA */}
         <div className="hidden sm:flex items-center gap-1 px-2 py-1.5 rounded-full border border-white/5 bg-black/20 backdrop-blur-md">
            <a href="https://github.com/Dslpss" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all">
              <Github className="w-4 h-4" />
@@ -86,7 +88,46 @@ export function Navbar() {
           <Mail className="w-4 h-4" />
           <span>Falar Comigo</span>
         </Link>
+        
+        {/* Mobile Menu Button */}
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-3 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/10"
+        >
+          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {/* Mobile Navigation Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="absolute top-24 left-4 right-4 p-4 rounded-2xl bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 shadow-2xl md:hidden pointer-events-auto"
+          >
+             <nav className="flex flex-col gap-2">
+               {links.map((link) => (
+                 <Link
+                   key={link.name}
+                   href={link.href}
+                   onClick={() => setIsOpen(false)}
+                   className="p-4 rounded-xl text-center text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-medium border border-transparent hover:border-white/5"
+                 >
+                   {link.name}
+                 </Link>
+               ))}
+               <hr className="border-white/10 my-2" />
+               <div className="flex justify-center gap-4 py-2">
+                 <a href="https://github.com/Dslpss" target="_blank" className="p-3 bg-white/5 rounded-full text-white"><Github className="w-5 h-5"/></a>
+                 <a href="https://www.linkedin.com/in/dennis-emannuel-60b670283/" target="_blank" className="p-3 bg-white/5 rounded-full text-neon-cyan"><Linkedin className="w-5 h-5"/></a>
+                 <a href="mailto:dennisemannuel93@gmail.com" className="p-3 bg-white text-black rounded-full"><Mail className="w-5 h-5"/></a>
+               </div>
+             </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }

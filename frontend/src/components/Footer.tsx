@@ -3,9 +3,19 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Twitter, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const [time, setTime] = useState<string>("");
+
+  useEffect(() => {
+    setTime(new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' }));
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' }));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <footer className="relative border-t border-white/10 bg-[#050505] overflow-hidden">
@@ -98,7 +108,7 @@ export function Footer() {
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
               São Paulo, BR
             </span>
-            <span>Local Time: {new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' })}</span>
+            <span>Local Time: {time}</span>
           </div>
         </div>
 
