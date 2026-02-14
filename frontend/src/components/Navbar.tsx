@@ -24,11 +24,11 @@ export function Navbar() {
       transition={{ duration: 0.8, ease: "circOut" }}
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 pointer-events-none"
     >
-      {/* 1. Left: Brand Identity */}
+      {/* Brand Identity - Force Refresh */}
       <div className="pointer-events-auto">
         <Link href="/" className="group flex items-center gap-3 px-2 pr-4 py-2 rounded-full border border-white/5 bg-black/20 backdrop-blur-md hover:bg-black/40 transition-colors">
           
-          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-neon-cyan transition-colors">
+          <div key="profile-avatar" className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-neon-cyan transition-colors">
             <Image 
               src="/perfil.png" 
               alt="Dennis Profile" 
