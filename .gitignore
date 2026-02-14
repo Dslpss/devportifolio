@@ -1,0 +1,11 @@
+.agent/
+.DS_Store
+node_modules/
+dist/
+target/
+.next/
+out/
+build/
+*.log
+.env
+.vercel

@@ -1,0 +1,36 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    cd frontend
+    npm ci
+    npm audit --audit-level=high || true 
+    npm run build
+  displayName: 'npm install, audit and build'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'frontend/.next'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+  displayName: 'Archive Build Artifacts'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
