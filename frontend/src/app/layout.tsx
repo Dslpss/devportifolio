@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DevOps & Fullstack Architect | Portfólio",
+  title: "DevOps & Fullstack Developer | Portfólio",
   description: "Demonstrando aplicações web de alta performance, automação Azure DevOps e integração MuleSoft.",
 };
 

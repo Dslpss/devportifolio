@@ -52,7 +52,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-20">
           
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-xl font-bold text-white mb-4">DEV.ARCHITECT</h3>
+            <h3 className="text-xl font-bold text-white mb-4">DEV.FULLSTACK</h3>
             <p className="text-gray-500 max-w-sm">
               Engenharia de software focada em performance, escalabilidade e design de ponta.
             </p>

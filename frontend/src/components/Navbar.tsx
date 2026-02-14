@@ -39,7 +39,7 @@ export function Navbar() {
 
           <div className="flex flex-col">
             <span className="font-bold tracking-tight text-xs text-gray-200 group-hover:text-white transition-colors leading-none">
-              DEV.ARCHITECT
+              DEV.FULLSTACK
             </span>
             <span className="text-[10px] text-neon-cyan font-medium leading-none mt-0.5 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span>
