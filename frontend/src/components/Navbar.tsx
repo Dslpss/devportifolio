@@ -34,6 +34,8 @@ export function Navbar() {
               src="/perfil.png" 
               alt="Dennis Profile" 
               fill 
+              sizes="32px"
+              priority
               className="object-cover"
             />
           </div>
