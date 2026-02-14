@@ -16,9 +16,9 @@ ENV MULE_HOME=/opt/mule
 # Install necessary tools
 RUN apk --no-cache add bash curl unzip
 
-# Download and Install Mule Kernel (Community Edition)
+# Download and Install Mule Kernel (Community Edition) from Maven Repo
 RUN cd /opt && \
-    curl -L https://developer.mulesoft.com/sites/default/files/mule/mule-standalone-${MULE_VERSION}.tar.gz -o mule-standalone.tar.gz && \
+    curl -L https://repository.mulesoft.org/nexus/content/repositories/releases/org/mule/distributions/mule-standalone/${MULE_VERSION}/mule-standalone-${MULE_VERSION}.tar.gz -o mule-standalone.tar.gz && \
     tar -xf mule-standalone.tar.gz && \
     mv mule-standalone-${MULE_VERSION} mule && \
     rm mule-standalone.tar.gz
